@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SomeoneIsHavingAWorseDay</title>
+  <link rel="icon" href="icon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/reddit.js@0.1.4/reddit.min.js"></script>
+</head>
+<body>
+
+    
+<style>
+body{
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    background-color: rgb(0, 0, 0);
+}
+.bigimg{
+    max-width: 50%;
+    border-radius: 25px;
+    margin-bottom: 50px;
+    border: 5px solid rgb(255, 0, 0)
+}
+button{
+    bottom: 0;
+
+    border-radius: 10px;
+    color: rgb(255, 0, 0);
+    border-color: rgb(255, 0, 0);
+    background-color: rgb(0, 0, 0);
+    width: 15%;
+    margin-left: -100px;
+    margin-bottom: 20px;
+    position: fixed;
+    z-index: 1;
+
+    font-size: 200%;
+}
+.bigimg{
+    text-align: center;
+}
+img:hover{
+    max-width: 55%;
+}
+</style>
+<div class="container">
+  <h1 class="text-center" style="color: rgb(255, 0, 0); margin-bottom: 50px;" >/r/wallstreetbets to make you feel good</h1>
+  <div class="text-center">
+    <button id="bt" onclick="load(); ">Feel Good</button>
+  </div>
+</div>
+<script>
+var depth = 10
+function load(){
+  (function () {
+    var rows = document.getElementsByClassName("row")
+    for (var i = 0; i < rows.length; ++i) {
+      rows[i].remove()  
+    }
+    document.getElementById("bt").innerHTML = 'Feel Better'
+    var container = document.querySelector(".container");
+    reddit.top("wallstreetbets").t("month").limit(depth).fetch(function (res) {
+      for (var i = 0; i < res.data.children.length; i++) {
+        var betData = res.data.children[i].data;
+        var thumbnail = document.createElement("img");
+        var bet = document.createElement("img");
+        var row = document.createElement("div");
+        var left = document.createElement("div");
+        var right = document.createElement("div");
+        var link = document.createElement("a");
+
+
+
+        row.className = "row";
+        left.className = "col-xs-4";
+        thumbnail.setAttribute("src", betData.thumbnail);
+
+        link.setAttribute("href", "https://www.reddit.com" + betData.permalink);
+        link.innerText = betData.title;
+
+        row.appendChild(left);
+        right.className = "col-xs-8";
+        bet.setAttribute("src", betData.url);
+        right.appendChild(bet);
+        row.appendChild(right);
+        container.appendChild(row);
+
+        bet.className = 'bigimg'
+
+        depth += 5
+      }
+    });
+  })();
+}
+</script>
+</body>
+</html>

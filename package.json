@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "parcel": "^2.8.2"
+  },
+  "dependencies": {
+    "reddit.js": "^0.1.4"
+  }
+}
