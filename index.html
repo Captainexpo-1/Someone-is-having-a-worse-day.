@@ -61,10 +61,8 @@ img:hover{
 var depth = 10
 function load(){
   (function () {
-    var rows = document.getElementsByClassName("row")
-    for (var i = 0; i < rows.length; ++i) {
-      rows[i].remove()  
-    }
+    const rows = document.querySelectorAll('.row');
+    rows.forEach(row => row.remove());
     document.getElementById("bt").innerHTML = 'Feel Better'
     var container = document.querySelector(".container");
     reddit.top("wallstreetbets").t("month").limit(depth).fetch(function (res) {
