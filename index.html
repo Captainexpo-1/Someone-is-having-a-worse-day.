@@ -53,7 +53,7 @@ img:hover{
 </style>
 <div class="container">
   <h1 class="text-center" style="color: rgb(255, 0, 0); margin-bottom: 50px;" >/r/wallstreetbets to make you feel good<br></h1>
-  <h2 class="text-container" id="caption" style="color: rgb(255, 0, 0); margin-bottom: 50px;"></h2>
+  <h3 class="text-center" id="caption" style="color: rgb(183, 0, 0); size: 200%;"></h3>
   <div class="text-center">
     <button id="bt" onclick="load(); ">Feel Good</button>
   </div>
@@ -61,6 +61,7 @@ img:hover{
 <script>
 var depth = -1
 var loaded = []
+var titles = []
 function load(){
   (function () {
     const rows = document.querySelectorAll('.row');
@@ -81,8 +82,8 @@ function load(){
 
         row.className = "row";
         left.className = "col-xs-4";
-        //thumbnail.setAttribute("src", betData.thumbnail);
 
+        //thumbnail.setAttribute("src", betData.thumbnail);
         //link.setAttribute("href", "https://www.reddit.com" + betData.permalink);
         //link.innerText = betData.title;
 
@@ -95,14 +96,18 @@ function load(){
           loaded.push(bet)
           console.log('not compatable on #' + i)
           right.appendChild(loaded[depth]);
+          titles.push(betData.title)
         }
-        console.log(betData)
+        console.log(bet)
         
         row.appendChild(right);
         container.appendChild(row);
 
         bet.className = 'bigimg'
-        document.getElementById('caption').innerText = betData.post_hint;
+        if(i === depth){
+          document.getElementById('caption').innerText = titles[depth];
+        }
+        
         
       }
     });
