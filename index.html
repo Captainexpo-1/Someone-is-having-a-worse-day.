@@ -52,20 +52,23 @@ img:hover{
 }
 </style>
 <div class="container">
-  <h1 class="text-center" style="color: rgb(255, 0, 0); margin-bottom: 50px;" >/r/wallstreetbets to make you feel good</h1>
+  <h1 class="text-center" style="color: rgb(255, 0, 0); margin-bottom: 50px;" >/r/wallstreetbets to make you feel good<br></h1>
+  <h2 class="text-container" id="caption" style="color: rgb(255, 0, 0); margin-bottom: 50px;"></h2>
   <div class="text-center">
     <button id="bt" onclick="load(); ">Feel Good</button>
   </div>
 </div>
 <script>
-var depth = 10
+var depth = -1
+var loaded = []
 function load(){
   (function () {
     const rows = document.querySelectorAll('.row');
     rows.forEach(row => row.remove());
+
     document.getElementById("bt").innerHTML = 'Feel Better'
     var container = document.querySelector(".container");
-    reddit.top("wallstreetbets").t("month").limit(depth).fetch(function (res) {
+    reddit.top("wallstreetbets").t("week").limit(5000).fetch(function (res) {
       for (var i = 0; i < res.data.children.length; i++) {
         var betData = res.data.children[i].data;
         var thumbnail = document.createElement("img");
@@ -76,26 +79,37 @@ function load(){
         var link = document.createElement("a");
 
 
-
         row.className = "row";
         left.className = "col-xs-4";
-        thumbnail.setAttribute("src", betData.thumbnail);
+        //thumbnail.setAttribute("src", betData.thumbnail);
 
-        link.setAttribute("href", "https://www.reddit.com" + betData.permalink);
-        link.innerText = betData.title;
+        //link.setAttribute("href", "https://www.reddit.com" + betData.permalink);
+        //link.innerText = betData.title;
 
         row.appendChild(left);
         right.className = "col-xs-8";
         bet.setAttribute("src", betData.url);
-        right.appendChild(bet);
+        bet.id = 'row'
+        
+        if(betData.post_hint === 'image' && betData.link_flair_text === 'Loss'){
+          loaded.push(bet)
+          console.log('not compatable on #' + i)
+          right.appendChild(loaded[depth]);
+        }
+        console.log(betData)
+        
         row.appendChild(right);
         container.appendChild(row);
 
         bet.className = 'bigimg'
-
-        depth += 5
+        document.getElementById('caption').innerText = betData.post_hint;
+        
       }
     });
+    depth += 1
+    
+    
+    
   })();
 }
 </script>
