@@ -8,6 +8,7 @@
   <link rel="icon" href="icon.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/reddit.js@0.1.4/reddit.min.js"></script>
+  <script src="index.js"></script>
 </head>
 <body>
 
@@ -27,7 +28,8 @@ body{
     max-width: 50%;
     border-radius: 25px;
     margin-bottom: 50px;
-    border: 5px solid rgb(255, 0, 0)
+    border: 5px solid rgb(255, 0, 0);
+    margin-left: 52%;
 }
 button{
     bottom: 0;
@@ -44,9 +46,6 @@ button{
 
     font-size: 200%;
 }
-.bigimg{
-    text-align: center;
-}
 img:hover{
     max-width: 55%;
 }
@@ -58,65 +57,5 @@ img:hover{
     <button id="bt" onclick="load(); ">Feel Good</button>
   </div>
 </div>
-<script>
-var depth = -1
-var loaded = []
-var titles = []
-function load(){
-  (function () {
-    const rows = document.querySelectorAll('.row');
-    rows.forEach(row => row.remove());
-
-    document.getElementById("bt").innerHTML = 'Feel Better'
-    var container = document.querySelector(".container");
-    reddit.top("wallstreetbets").t("week").limit(5000).fetch(function (res) {
-      for (var i = 0; i < res.data.children.length; i++) {
-        var betData = res.data.children[i].data;
-        var thumbnail = document.createElement("img");
-        var bet = document.createElement("img");
-        var row = document.createElement("div");
-        var left = document.createElement("div");
-        var right = document.createElement("div");
-        var link = document.createElement("a");
-
-
-        row.className = "row";
-        left.className = "col-xs-4";
-
-        //thumbnail.setAttribute("src", betData.thumbnail);
-        //link.setAttribute("href", "https://www.reddit.com" + betData.permalink);
-        //link.innerText = betData.title;
-
-        row.appendChild(left);
-        right.className = "col-xs-8";
-        bet.setAttribute("src", betData.url);
-        bet.id = 'row'
-        
-        if(betData.post_hint === 'image' && betData.link_flair_text === 'Loss'){
-          loaded.push(bet)
-          console.log('not compatable on #' + i)
-          right.appendChild(loaded[depth]);
-          titles.push(betData.title)
-        }
-        console.log(bet)
-        
-        row.appendChild(right);
-        container.appendChild(row);
-
-        bet.className = 'bigimg'
-        if(i === depth){
-          document.getElementById('caption').innerText = titles[depth];
-        }
-        
-        
-      }
-    });
-    depth += 1
-    
-    
-    
-  })();
-}
-</script>
 </body>
 </html>
