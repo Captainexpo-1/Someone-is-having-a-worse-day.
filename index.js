@@ -15,7 +15,6 @@ var test = 0
         bet.id = 'row';
         bet.setAttribute("src", betData.url); //set url of image to reddit post
         bet.className = 'bigimg';
-        /* ----- not needed ----- */
         
         if(betData.post_hint === 'image' && betData.link_flair_text === 'Loss'){
           loaded.push(bet) //add this image to the list 
