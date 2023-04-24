@@ -1,0 +1,77 @@
+body{
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: black;
+    background-image: radial-gradient(circle at center, rgb(87, 87, 87) 0, rgb(35, 35, 35), rgb(0, 0, 0) 100%);
+}
+.bigimg{
+    
+    border-radius: 25px;
+    margin-bottom: 50px;
+    border: 5px solid rgb(255, 0, 0);
+    
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+
+    margin-top: 50px;
+
+    box-shadow: 0px 5px 5px black;
+
+    transition: 1s;
+}
+button{
+
+    bottom: 0;
+
+    border-radius: 10px;
+    color: rgb(255, 0, 0);
+    border-color: rgb(255, 0, 0);
+    background-color: rgb(0, 0, 0);
+    width: 15%;
+    margin-bottom: 20px;
+    margin-left: -100px;
+    position: fixed;
+    z-index: 1;
+    font-size: 200%;
+    transition: 0.4s;
+    opacity: 50%;
+}
+button:hover{
+    animation: pulse 1s infinite;
+    opacity: 100%;
+    
+}
+#title{
+    color: rgb(255, 0, 0); 
+    margin-bottom: 50px;
+}
+#caption{
+    color: rgb(183, 0, 0); 
+    size: 200%;
+}
+/*https://www.florin-pop.com/blog/2019/03/css-pulse-effect/*/
+@keyframes pulse {
+	0% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+	}
+
+	70% {
+		transform: scale(1);
+		box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+	}
+
+	100% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+	}
+}
+.bigimg:hover{
+    width: 650px;
+}
