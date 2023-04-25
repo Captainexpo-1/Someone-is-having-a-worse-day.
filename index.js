@@ -3,8 +3,6 @@ var loaded = [];
 var titles = [];
 
 var isloaded = false
-var test = 0
-    
 
 //document.getElementById("bt").innerHTML = 'Feel Better';
 var container = document.querySelector(".container");
@@ -36,23 +34,35 @@ reddit.top("wallstreetbets").t('week').limit(50000).fetch(function (res) {
   }
   isloaded = true
   document.getElementById('caption').innerText = 'go ahead :)'
-test+=5
-console.log(test)
-    
     
 });
-
-
+let img;
 function load(){
   if(!isloaded){return 0}
   const rows = document.querySelectorAll('.bigimg');
   rows.forEach(row => row.remove());
   if(depth+1 < loaded.length){
     depth++
-    console.log(typeof container)
     document.getElementById('container').appendChild(loaded[depth]);
+    img = loaded[depth]
+    img.style.width = '30%'
+    img.addEventListener("click", toggleImgSize)
     document.getElementById('caption').innerText = titles[depth];
   }else{
     window.location.href = 'https://www.google.com/search?q=therapists+near+me&rlz=1C5CHFA_enUS1037US1038&oq=therapist&aqs=chrome.0.0i131i433i457i512j69i57j0i402l2j0i433i512j0i131i433i512j0i433i512j0i512j0i433i512j0i512.2375j0j7&sourceid=chrome&ie=UTF-8'
   }
 }
+
+let imgBig = false
+function toggleImgSize(){
+  console.log("clicked")
+  if(imgBig){
+    img.style.width = '30%'
+    imgBig = false
+  }else{
+    img.style.width = '60%'
+    imgBig = true
+  }
+
+}
+
